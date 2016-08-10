@@ -104,8 +104,8 @@ namespace Practice
             foreach (var item in Occurrence)
             {
                 char key = item.Key;
-                int value = Occurrence[item.Key];                
-                Frequency.Add(key, (value/final) * 100);
+                int value = Occurrence[item.Key];
+                Frequency.Add(key, double.Parse(string.Format("{0:f2}", (value/final) * 100)));
                 Console.WriteLine(key + " -> " + value);
             }
 
@@ -136,6 +136,21 @@ namespace Practice
                 Console.WriteLine(key + " -> " + value);
             }
 
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+
+            //Display all the information
+            foreach (KeyValuePair<char, int> pair in ASCII)
+            {
+                char key = pair.Key;
+                int value1 = ASCII[pair.Key];
+                int value2 = Occurrence[pair.Key];
+                double value3 = Frequency[pair.Key];
+
+                Console.WriteLine(key + "    " + value1 + " \t " + value2 + " \t " + value3);                
+            }
+            
         }
         
     }
