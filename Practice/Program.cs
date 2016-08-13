@@ -1,4 +1,19 @@
-﻿using System;
+﻿
+/*  ----------------------------------------
+ * 
+ *  COMP 212 - Programming 3                
+ *  Final Project - Substitute Compression
+ *  Submission date: 17/08/2016
+ *  ----------------------------------------
+ *  Selina Daley
+ *  Amna Gulraiz - 300627536
+ *  Kevin 
+ *  Max
+ *  Kadim 
+ *  ----------------------------------------
+ */
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,9 +38,10 @@ namespace Practice
             PopulateHuffmanList(HuffmanValues);
 
             //Instance variables
-            string fileName = "IronHeel.txt"; //Hardcoded textfile
-            FileStream inFile;
+            string fileName = "IronHeel.txt", fileName2 = "encrypt.txt"; //Hardcoded textfile
+            FileStream inFile, newFile;
             StreamReader reader;
+            StreamWriter writer;
             string nextRecord; 
             bool done = false;
             int count = 0, count2 = 0;
@@ -163,6 +179,56 @@ namespace Practice
                 Console.WriteLine(key + "    " + value1 + " \t " + value2 + " \t " + value3 + " \t " + value4);
             }
 
+             if (File.Exists(fileName2))
+            {
+                File.Delete(fileName2);
+            }
+            newFile = new FileStream(fileName2, FileMode.Create, FileAccess.Write);
+            writer = new StreamWriter(newFile);
+            done = false;
+
+            // Encoding -------- build the ciphered text by converting each characters into its Huffman representation
+            do
+            {
+                try
+                {
+                    inFile = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                    reader = new StreamReader(inFile);
+                    nextRecord = reader.ReadLine();
+                    while (nextRecord != null)
+                    {
+                        foreach (var letter in nextRecord.ToLower())
+                        {
+                            foreach (var item in ASCII)
+                            {
+                                if (letter.Equals(item.Key))
+                                {
+                                    writer.Write(Huffman_Code[item.Key]);
+                                    break;
+                                }
+                                else if (letter.Equals(',') || letter.Equals(':') || letter.Equals(';'))
+                                {
+                                    writer.Write(Huffman_Code[item.Key]);
+                                    break;
+                                }
+                            }
+                        }
+                        nextRecord = reader.ReadLine();
+                        writer.WriteLine();
+                    }
+                    reader.Close();
+                    inFile.Close();
+                    done = true;                   
+                }
+                catch (Exception ex)
+                {
+                    Console.Write("\nError: " + ex.Message + ". Press Enter");
+                }
+            } while (!done);
+
+            writer.Close();
+            newFile.Close();
+            
         }
         
         //Method to populae the huffman list
