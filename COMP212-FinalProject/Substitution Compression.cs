@@ -28,26 +28,26 @@ namespace COMP212_FinalProject
 {
     public partial class FrmSubstitutionCompression : Form
     {
-         //Create Dictionaries
-            Dictionary<char, int> ASCII = new Dictionary<char, int>();
-            Dictionary<char, int> Occurrence = new Dictionary<char, int>();
-            Dictionary<char, double> Frequency = new Dictionary<char, double>();
-            Dictionary<char, double> Sorted_Frequency = new Dictionary<char, double>();
-            Dictionary<char, string> Huffman_Code = new Dictionary<char, string>();
+        //Create Dictionaries
+        Dictionary<char, int> ASCII = new Dictionary<char, int>();
+        Dictionary<char, int> Occurrence = new Dictionary<char, int>();
+        Dictionary<char, double> Frequency = new Dictionary<char, double>();
+        Dictionary<char, double> Sorted_Frequency = new Dictionary<char, double>();
+        Dictionary<char, string> Huffman_Code = new Dictionary<char, string>();
 
-            //Create a list to hold the huffman values and populate the list
-            List<string> HuffmanValues = new List<string>();
+        //Create a list to hold the huffman values and populate the list
+        List<string> HuffmanValues = new List<string>();
 
-            //Instance variables
-            string fileName = "IronHeel.txt", fileName2 = "encrypt.txt"; //Hardcoded textfile
-            FileStream inFile, newFile;
-            StreamReader reader;
-            StreamWriter writer;
-            string nextRecord; 
-            bool done = false;
-            int count = 0, count2 = 0;
-            double count3 = 0, count4 = 0;
-            int startValue = 1;
+        //Instance variables
+        string fileName = "IronHeel.txt", fileName2 = "encrypt.txt", fileName3 = "decrypt.txt"; //Hardcoded textfile
+        FileStream inFile, newFile;
+        StreamReader reader;
+        StreamWriter writer;
+        string nextRecord;
+        bool done = false;
+        int count = 0, count2 = 0;
+        double count3 = 0, count4 = 0;
+        int startValue = 1;
         public FrmSubstitutionCompression()
         {
             InitializeComponent();
@@ -194,8 +194,8 @@ namespace COMP212_FinalProject
         {
             // Encoding --- build the ciphered text by converting each 
             //              characters into its Huffman representation
-          
-             if (File.Exists(fileName2))
+
+            if (File.Exists(fileName2))
             {
                 File.Delete(fileName2);
             }
@@ -204,7 +204,7 @@ namespace COMP212_FinalProject
             writer = new StreamWriter(newFile);
             done = false;
 
-             do
+            do
             {
                 try
                 {
@@ -231,6 +231,7 @@ namespace COMP212_FinalProject
                         }
                         nextRecord = reader.ReadLine();
                         writer.WriteLine();
+
                     }
                     reader.Close();
                     inFile.Close();
@@ -250,14 +251,77 @@ namespace COMP212_FinalProject
         private void btnDecrypt_Click(object sender, EventArgs e)
         {
 
+            // Deccoding ---
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            if (File.Exists(fileName3))
+            {
+                File.Delete(fileName3);
+            }
+
+            newFile = new FileStream(fileName3, FileMode.Create, FileAccess.Write);
+            writer = new StreamWriter(newFile);
+            done = false;
+
+            do
+            {
+                try
+                {
+
+                    inFile = new FileStream(fileName2, FileMode.Open, FileAccess.Read);
+                    reader = new StreamReader(inFile);
+                    nextRecord = reader.ReadLine();
+                    StringBuilder nextChar = new StringBuilder();
+                    while (nextRecord != null)
+                  
+                    {
+                        
+                        
+                            
+                            foreach (var item in Huffman_Code)                         
+                            {
+                                foreach (var character in nextRecord)
+                                {
+                                sb.Append(character);
+                                if (Huffman_Code.ContainsValue(sb.ToString()))
+                                //if (sb.Equals(item.Value))
+                                {
+                                    nextChar.Append(item.Key.ToString().ToUpper());
+                                    //writer.Write(item.Key);                    
+                                    break;
+                                }
+                                
+                            }
+                                
+                        }
+                        nextRecord = reader.ReadLine();
+                        writer.WriteLine(nextChar);
+                        sb.Clear();
+
+                    }
+                    reader.Close();
+                    inFile.Close();
+                    done = true;
+
+                }
+
+                catch (Exception ex)
+                {
+                    Console.Write("\nError: " + ex.Message + ". Press Enter");
+                }
+            } while (!done);
+
+            writer.Close();
+            newFile.Close();
+            System.Diagnostics.Process.Start("decrypt.txt");
         }
+
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-           public static void PopulateHuffmanList(List<string> huffmanList)
+        public static void PopulateHuffmanList(List<string> huffmanList)
         {
             huffmanList.Add("100");
             huffmanList.Add("0010");
@@ -288,21 +352,21 @@ namespace COMP212_FinalProject
             huffmanList.Add("1101000100");
         }
 
-           private void DisplayTable()
-           {
-              
+        private void DisplayTable()
+        {
+
             //Display all the information
-               foreach (KeyValuePair<char, int> pair in ASCII)
-               {
-                   char key = pair.Key;
-                   int value1 = ASCII[pair.Key];
-                   int value2 = Occurrence[pair.Key];
-                   double value3 = Frequency[pair.Key];
-                   string value4 = Huffman_Code[pair.Key];
+            foreach (KeyValuePair<char, int> pair in ASCII)
+            {
+                char key = pair.Key;
+                int value1 = ASCII[pair.Key];
+                int value2 = Occurrence[pair.Key];
+                double value3 = Frequency[pair.Key];
+                string value4 = Huffman_Code[pair.Key];
 
+                //Console.WriteLine(ASCII.Keys + " " + ASCII.Values);
+            }
 
-               }
-
-           }
+        }
     }
 }
