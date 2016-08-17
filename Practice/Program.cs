@@ -79,7 +79,7 @@ namespace Practice
                     nextRecord = reader.ReadLine();
                     while (nextRecord != null)
                     {
-                        foreach (var letter in nextRecord.ToLower())
+                        foreach (var letter in nextRecord.ToUpper())
                         {
                             foreach (var item in ASCII)
                             {
@@ -197,7 +197,7 @@ namespace Practice
                     nextRecord = reader.ReadLine();
                     while (nextRecord != null)
                     {
-                        foreach (var letter in nextRecord.ToLower())
+                        foreach (var letter in nextRecord.ToUpper())
                         {
                             foreach (var item in ASCII)
                             {

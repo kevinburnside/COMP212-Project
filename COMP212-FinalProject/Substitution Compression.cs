@@ -7,7 +7,7 @@
  *  ----------------------------------------
  *  Selina Daley
  *  Amna Gulraiz - 300627536
- *  Kevin 
+ *  Kevin Burnside - 300454171
  *  Max
  *  Kadim 
  *  ----------------------------------------
@@ -39,7 +39,7 @@ namespace COMP212_FinalProject
         List<string> HuffmanValues = new List<string>();
 
         //Instance variables
-        string fileName = "IronHeel.txt", fileName2 = "encrypt.txt", fileName3 = "decrypt.txt"; //Hardcoded textfile
+        string fileName = "IronHeel.txt", fileName2 = "Huffman_ciphered.txt", fileName3 = "Huffman_decoded.txt"; //Hardcoded textfile
         FileStream inFile, newFile;
         StreamReader reader;
         StreamWriter writer;
@@ -98,7 +98,7 @@ namespace COMP212_FinalProject
                     nextRecord = reader.ReadLine();
                     while (nextRecord != null)
                     {
-                        foreach (var letter in nextRecord.ToLower())
+                        foreach (var letter in nextRecord.ToUpper())
                         {
                             foreach (var item in ASCII)
                             {
@@ -213,7 +213,7 @@ namespace COMP212_FinalProject
                     nextRecord = reader.ReadLine();
                     while (nextRecord != null)
                     {
-                        foreach (var letter in nextRecord.ToLower())
+                        foreach (var letter in nextRecord.ToUpper())
                         {
                             foreach (var item in ASCII)
                             {
@@ -252,7 +252,7 @@ namespace COMP212_FinalProject
         {
 
             // Deccoding ---
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
             if (File.Exists(fileName3))
             {
                 File.Delete(fileName3);
@@ -270,38 +270,38 @@ namespace COMP212_FinalProject
                     inFile = new FileStream(fileName2, FileMode.Open, FileAccess.Read);
                     reader = new StreamReader(inFile);
                     nextRecord = reader.ReadLine();
+                    StringBuilder sb = new System.Text.StringBuilder();
                     StringBuilder nextChar = new StringBuilder();
                     while (nextRecord != null)
-                  
                     {
-                        
-                        
-                            
-                            foreach (var item in Huffman_Code)                         
+                        //Reads each character in and appends it to a stringbuilder                     
+                        foreach (var character in nextRecord)
+                        {
+                            sb.Append(character);
+                            //Checks to see if the StringBuilder matches to a value in the Huffman_Code Dictionary
+                            if (Huffman_Code.ContainsValue(sb.ToString()))
                             {
-                                foreach (var character in nextRecord)
+                                foreach (var item in Huffman_Code)
                                 {
-                                sb.Append(character);
-                                if (Huffman_Code.ContainsValue(sb.ToString()))
-                                //if (sb.Equals(item.Value))
-                                {
-                                    nextChar.Append(item.Key.ToString().ToUpper());
-                                    //writer.Write(item.Key);                    
-                                    break;
+                                    if (item.Value.Equals(sb.ToString()))
+                                    {
+                                        writer.Write(item.Key);
+                                        sb.Clear();
+                                        break;
+                                    }
+
                                 }
-                                
+
                             }
-                                
+                            nextRecord = reader.ReadLine();
+                            writer.WriteLine();
                         }
-                        nextRecord = reader.ReadLine();
-                        writer.WriteLine(nextChar);
-                        sb.Clear();
 
                     }
+
                     reader.Close();
                     inFile.Close();
                     done = true;
-
                 }
 
                 catch (Exception ex)
@@ -312,7 +312,7 @@ namespace COMP212_FinalProject
 
             writer.Close();
             newFile.Close();
-            System.Diagnostics.Process.Start("decrypt.txt");
+            System.Diagnostics.Process.Start("Huffman_decoded.txt");
         }
 
 
