@@ -352,17 +352,125 @@ namespace COMP212_FinalProject
         private void DisplayTable()
         {
 
-            //Display all the information
+            List<TextBox> list = new List<TextBox>();
+            for (int i = 0; i < 28; i++)
+            {
+                list.Add(new TextBox());
+                list[i].Name = i.ToString();
+                list[i].Location = new System.Drawing.Point(40, (i * 20) + 60);
+                list[i].ReadOnly = true;
+                list[i].TextAlign = HorizontalAlignment.Center;
+                this.Controls.Add(list[i]);
+            }
+            list[0].Text = "Letter";
+            list[1].Text = "Space";
+            list[2].Text = "A";
+            list[3].Text = "B";
+            list[4].Text = "C";
+            list[5].Text = "D";
+            list[6].Text = "E";
+            list[7].Text = "F";
+            list[8].Text = "G";
+            list[9].Text = "H";
+            list[10].Text = "I";
+            list[11].Text = "J";
+            list[12].Text = "K";
+            list[13].Text = "L";
+            list[14].Text = "M";
+            list[15].Text = "N";
+            list[16].Text = "O";
+            list[17].Text = "P";
+            list[18].Text = "Q";
+            list[19].Text = "R";
+            list[20].Text = "S";
+            list[21].Text = "T";
+            list[22].Text = "U";
+            list[23].Text = "V";
+            list[24].Text = "W";
+            list[25].Text = "X";
+            list[26].Text = "Y";
+            list[27].Text = "Z";
+
+            List<TextBox> list2 = new List<TextBox>();
+            for (int i = 0; i < 27; i++)
+            {
+                list2.Add(new TextBox());
+                //list2[i].Name = (i + 28).ToString();
+                list2[i].Location = new System.Drawing.Point(140, (i * 20) + 80);
+                this.Controls.Add(list2[i]);
+                list2[i].TextAlign = HorizontalAlignment.Center;
+                //var lines = ASCII.Select(kv => kv.Key + ": " + kv.Value.ToString());
+                //list2[i].Text = string.Join(Environment.NewLine, lines);
+                //list2[i].Text = ASCII.ToString();
+            }
+
+            List<TextBox> list3 = new List<TextBox>();
+            for (int i = 0; i < 27; i++)
+            {
+                list3.Add(new TextBox());
+                list3[i].Location = new System.Drawing.Point(240, (i * 20) + 80);
+                this.Controls.Add(list3[i]);
+                list3[i].TextAlign = HorizontalAlignment.Center;
+                //var lines = Occurrence.Select(kv => kv.Key + ": " + kv.Value.ToString());
+                //list3[i].Text = string.Join(Environment.NewLine, lines);
+            }
+
+            List<TextBox> list4 = new List<TextBox>();
+            for (int i = 0; i < 27; i++)
+            {
+                list4.Add(new TextBox());
+                list4[i].Location = new System.Drawing.Point(340, (i * 20) + 80);
+                this.Controls.Add(list4[i]);
+                list4[i].TextAlign = HorizontalAlignment.Center;
+                //var lines = Sorted_Frequency.Select(kv => kv.Key + ": " + kv.Value.ToString());
+                //list4[i].Text = string.Join(Environment.NewLine, lines);
+            }
+
+            List<TextBox> list5 = new List<TextBox>();
+            for (int i = 0; i < 27; i++)
+            {
+                list5.Add(new TextBox());
+                list5[i].Location = new System.Drawing.Point(440, (i * 20) + 80);
+                this.Controls.Add(list5[i]);
+                list5[i].TextAlign = HorizontalAlignment.Center;
+                //var lines = Huffman_Code.Select(kv => kv.Key + ": " + kv.Value.ToString());
+                //list5[i].Text = string.Join(Environment.NewLine, lines);
+            }
+            List<TextBox> list6 = new List<TextBox>();
+            for (int i = 0; i < 4; i++)
+            {
+                list6.Add(new TextBox());
+                list6[i].ReadOnly = true;
+                list6[i].Location = new System.Drawing.Point(140 + (i * 100), 60);
+                this.Controls.Add(list6[i]);
+                list6[i].TextAlign = HorizontalAlignment.Center;
+            }
+            list6[0].Text = "Ascii";
+            list6[1].Text = "Occurence";
+            list6[2].Text = "Frequency";
+            list6[3].Text = "Huffman_Code";
             foreach (KeyValuePair<char, int> pair in ASCII)
             {
+
                 char key = pair.Key;
                 int value1 = ASCII[pair.Key];
                 int value2 = Occurrence[pair.Key];
                 double value3 = Frequency[pair.Key];
                 string value4 = Huffman_Code[pair.Key];
-
-                //Console.WriteLine(ASCII.Keys + " " + ASCII.Values);
+                for (int i = 0; i < 27; i++)
+                {
+                    //Console.WriteLine(ASCII.Keys + " " + ASCII.Values);
+                    list2[i].Text = value1.ToString();
+                    list3[i].Text = value2.ToString();
+                    list4[i].Text = value3.ToString();
+                    list4[i].Text = value4;
+                }
             }
+
+        }
+
+        private void FrmSubstitutionCompression_Load(object sender, EventArgs e)
+        {
 
         }
     }

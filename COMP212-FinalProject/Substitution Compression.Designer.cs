@@ -177,6 +177,7 @@
             this.Controls.Add(this.lblBrowse);
             this.Name = "FrmSubstitutionCompression";
             this.Text = "Substitution Compression";
+            this.Load += new System.EventHandler(this.FrmSubstitutionCompression_Load);
             this.compressionGroupBox.ResumeLayout(false);
             this.compressionGroupBox.PerformLayout();
             this.ResumeLayout(false);

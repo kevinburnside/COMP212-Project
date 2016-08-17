@@ -1,0 +1,8 @@
+C:\Users\Max\Desktop\new\COMP212-Project-master\COMP212-FinalProject\bin\Debug\COMP212-FinalProject.exe.config
+C:\Users\Max\Desktop\new\COMP212-Project-master\COMP212-FinalProject\bin\Debug\COMP212-FinalProject.exe
+C:\Users\Max\Desktop\new\COMP212-Project-master\COMP212-FinalProject\bin\Debug\COMP212-FinalProject.pdb
+C:\Users\Max\Desktop\new\COMP212-Project-master\COMP212-FinalProject\obj\Debug\COMP212_FinalProject.Properties.Resources.resources
+C:\Users\Max\Desktop\new\COMP212-Project-master\COMP212-FinalProject\obj\Debug\COMP212_FinalProject.FrmSubstitutionCompression.resources
+C:\Users\Max\Desktop\new\COMP212-Project-master\COMP212-FinalProject\obj\Debug\COMP212-FinalProject.csproj.GenerateResource.Cache
+C:\Users\Max\Desktop\new\COMP212-Project-master\COMP212-FinalProject\obj\Debug\COMP212-FinalProject.exe
+C:\Users\Max\Desktop\new\COMP212-Project-master\COMP212-FinalProject\obj\Debug\COMP212-FinalProject.pdb
