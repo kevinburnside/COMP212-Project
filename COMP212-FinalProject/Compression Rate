@@ -1,0 +1,11 @@
+// Compression Rate 
+// 
+string data = File.ReadAllText("IronHill.txt");
+	byte[] text = Encoding.ASCII.GetBytes(data);
+	byte[] compress = Compress(text);
+	File.WriteAllBytes("Centennial college");
+
+// By Using ASCII Code
+
+
+// By Using HuffMan Code
