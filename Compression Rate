@@ -5,4 +5,9 @@ string data = File.ReadAllText("IronHill.txt");
 	byte[] compress = Compress(text);
 	File.WriteAllBytes("Centennial college");
 
+// By Using ASCII Code
+
+
+// By Using HuffMan Code
+
 
