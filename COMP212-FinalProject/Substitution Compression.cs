@@ -39,7 +39,7 @@ namespace COMP212_FinalProject
         List<string> HuffmanValues = new List<string>();
 
         //Instance variables
-        string fileName = "IronHeel.txt", fileName2 = "encrypt.txt", fileName3 = "decrypt.txt"; //Hardcoded textfile
+        string fileName = "IronHeel.txt", fileName2 = "Huffman_ciphered.txt", fileName3 = "Huffman_decoded.txt"; //Hardcoded textfile
         FileStream inFile, newFile;
         StreamReader reader;
         StreamWriter writer;
@@ -47,6 +47,7 @@ namespace COMP212_FinalProject
         bool done = false;
         int count = 0, count2 = 0;
         double count3 = 0, count4 = 0;
+        double characterCount, cipheredCount;
         int startValue = 1;
         public FrmSubstitutionCompression()
         {
@@ -135,7 +136,7 @@ namespace COMP212_FinalProject
             } while (!done);
 
             //Display character counts
-            double final = count + count2;
+            characterCount = count + count2;
             //Console.WriteLine(count + " + " + count2 + " = " + final);
 
             //Display Occurence dictionary and initialize Frequency dictionary
@@ -143,8 +144,8 @@ namespace COMP212_FinalProject
             {
                 char key = item.Key;
                 int value = Occurrence[item.Key];
-                count4 += double.Parse(string.Format("{0:f2}", (value / final) * 100));
-                Frequency.Add(key, double.Parse(string.Format("{0:f2}", (value / final) * 100)));
+                count4 += double.Parse(string.Format("{0:f2}", (value / characterCount) * 100));
+                Frequency.Add(key, double.Parse(string.Format("{0:f2}", (value / characterCount) * 100)));
                 // Console.WriteLine(key + " -> " + value);
             }
 
@@ -231,7 +232,6 @@ namespace COMP212_FinalProject
                         }
                         nextRecord = reader.ReadLine();
                         writer.WriteLine();
-
                     }
                     reader.Close();
                     inFile.Close();
@@ -245,7 +245,7 @@ namespace COMP212_FinalProject
 
             writer.Close();
             newFile.Close();
-            System.Diagnostics.Process.Start("encrypt.txt");
+            System.Diagnostics.Process.Start(fileName2);
         }
 
         private void btnDecrypt_Click(object sender, EventArgs e)
@@ -285,19 +285,16 @@ namespace COMP212_FinalProject
                                 {
                                     if (item.Value.Equals(sb.ToString()))
                                     {
-                                        writer.Write(item.Key);
+                                        string letter = (item.Key).ToString();
+                                        writer.Write(letter.ToUpper());
                                         sb.Clear();
                                         break;
                                     }
-
                                 }
-
-                            }
-                            
+                            }                            
                         }
                         nextRecord = reader.ReadLine();
                         writer.WriteLine();
-
                     }
                     reader.Close();
                     inFile.Close();
@@ -312,7 +309,7 @@ namespace COMP212_FinalProject
 
             writer.Close();
             newFile.Close();
-            System.Diagnostics.Process.Start("decrypt.txt");
+            System.Diagnostics.Process.Start(fileName3);
         }
 
 
