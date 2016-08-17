@@ -8,7 +8,7 @@
  *  Selina Daley
  *  Amna Gulraiz - 300627536
  *  Kevin Burnside - 300454171
- *  Max
+ *  Max Sazhaev - 300830601
  *  Kadim 
  *  ----------------------------------------
  */
