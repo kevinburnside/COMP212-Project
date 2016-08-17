@@ -39,7 +39,7 @@ namespace COMP212_FinalProject
         List<string> HuffmanValues = new List<string>();
 
         //Instance variables
-        string fileName = "IronHeel.txt", fileName2 = "Huffman_ciphered.txt", fileName3 = "Huffman_decoded.txt"; //Hardcoded textfile
+        string fileName = "IronHeel.txt", fileName2 = "encrypt.txt", fileName3 = "decrypt.txt"; //Hardcoded textfile
         FileStream inFile, newFile;
         StreamReader reader;
         StreamWriter writer;
@@ -98,7 +98,7 @@ namespace COMP212_FinalProject
                     nextRecord = reader.ReadLine();
                     while (nextRecord != null)
                     {
-                        foreach (var letter in nextRecord.ToUpper())
+                        foreach (var letter in nextRecord.ToLower())
                         {
                             foreach (var item in ASCII)
                             {
@@ -213,7 +213,7 @@ namespace COMP212_FinalProject
                     nextRecord = reader.ReadLine();
                     while (nextRecord != null)
                     {
-                        foreach (var letter in nextRecord.ToUpper())
+                        foreach (var letter in nextRecord.ToLower())
                         {
                             foreach (var item in ASCII)
                             {
@@ -293,12 +293,12 @@ namespace COMP212_FinalProject
                                 }
 
                             }
-                            nextRecord = reader.ReadLine();
-                            writer.WriteLine();
+                            
                         }
+                        nextRecord = reader.ReadLine();
+                        writer.WriteLine();
 
                     }
-
                     reader.Close();
                     inFile.Close();
                     done = true;
@@ -312,7 +312,7 @@ namespace COMP212_FinalProject
 
             writer.Close();
             newFile.Close();
-            System.Diagnostics.Process.Start("Huffman_decoded.txt");
+            System.Diagnostics.Process.Start("decrypt.txt");
         }
 
 
