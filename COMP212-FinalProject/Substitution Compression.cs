@@ -39,7 +39,8 @@ namespace COMP212_FinalProject
         List<string> HuffmanValues = new List<string>();
 
         //Instance variables
-        string fileName = "IronHeel.txt", fileName2 = "Huffman_ciphered.txt", fileName3 = "Huffman_decoded.txt"; //Hardcoded textfile
+        string fileName = "IronHeel.txt", fileName2 = "Huffman_ciphered.txt", 
+            fileName3 = "Huffman_decoded.txt"; //Hardcoded textfile
         FileStream inFile, newFile;
         StreamReader reader;
         StreamWriter writer;
@@ -57,10 +58,10 @@ namespace COMP212_FinalProject
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             //browse button functionality --- OpenFile Dialog opens the location of the file
+
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.InitialDirectory = "C:\\COMP212-Project\\Ironheel.txt"; // this is the path that you are checking.
             dlg.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            // dlg.InitialDirectory = "C:\\COMP212-Project\\Ironheel.txt";
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
@@ -194,7 +195,6 @@ namespace COMP212_FinalProject
         {
             // Encoding --- build the ciphered text by converting each 
             //              characters into its Huffman representation
-
             if (File.Exists(fileName2))
             {
                 File.Delete(fileName2);
@@ -213,7 +213,7 @@ namespace COMP212_FinalProject
                     nextRecord = reader.ReadLine();
                     while (nextRecord != null)
                     {
-                        foreach (var letter in nextRecord.ToUpper())
+                        foreach (var letter in nextRecord.ToLower())
                         {
                             foreach (var item in ASCII)
                             {
@@ -231,7 +231,6 @@ namespace COMP212_FinalProject
                         }
                         nextRecord = reader.ReadLine();
                         writer.WriteLine();
-
                     }
                     reader.Close();
                     inFile.Close();
@@ -239,13 +238,13 @@ namespace COMP212_FinalProject
                 }
                 catch (Exception ex)
                 {
-                    Console.Write("\nError: " + ex.Message + ". Press Enter");
+                    MessageBox.Show("\nError: " + ex.Message + ". Press Enter");
                 }
             } while (!done);
 
             writer.Close();
             newFile.Close();
-            System.Diagnostics.Process.Start("encrypt.txt");
+            System.Diagnostics.Process.Start("Huffman_ciphered.txt");
         }
 
         private void btnDecrypt_Click(object sender, EventArgs e)
@@ -306,7 +305,7 @@ namespace COMP212_FinalProject
 
                 catch (Exception ex)
                 {
-                    Console.Write("\nError: " + ex.Message + ". Press Enter");
+                    MessageBox.Show("\nError: " + ex.Message + ". Press Enter");
                 }
             } while (!done);
 
@@ -363,8 +362,7 @@ namespace COMP212_FinalProject
                 int value2 = Occurrence[pair.Key];
                 double value3 = Frequency[pair.Key];
                 string value4 = Huffman_Code[pair.Key];
-
-                //Console.WriteLine(ASCII.Keys + " " + ASCII.Values);
+               
             }
 
         }
